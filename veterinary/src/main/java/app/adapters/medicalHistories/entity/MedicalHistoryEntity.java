@@ -3,6 +3,7 @@ package app.adapters.medicalHistories.entity;
 import app.adapters.orders.entity.OrderEntity;
 import app.adapters.persons.entity.PersonEntity;
 import app.adapters.pets.entity.PetEntity;
+import app.adapters.users.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class MedicalHistoryEntity {
     private Timestamp date;
     @JoinColumn(name = "veterinarian_id")
     @ManyToOne
-    private PersonEntity veterinarian;
+    private UserEntity veterinarian;
     @JoinColumn(name = "pet_id")
     @ManyToOne
     private PetEntity pet;

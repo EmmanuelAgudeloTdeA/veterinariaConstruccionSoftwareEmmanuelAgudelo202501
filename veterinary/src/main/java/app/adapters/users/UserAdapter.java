@@ -52,7 +52,7 @@ public class UserAdapter implements UserPort {
         return userAdapter(userEntity);
     }
 
-    private User userAdapter(UserEntity userEntity) {
+    public User userAdapter(UserEntity userEntity) {
         if (userEntity == null) {
             return null;
         }
@@ -69,7 +69,7 @@ public class UserAdapter implements UserPort {
         return user;
     }
 
-    private UserEntity userEntityAdapter(User user) {
+    public UserEntity userEntityAdapter(User user) {
         PersonEntity personEntity = personAdapter.personEntityAdapter(user);
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(user.getUserId());

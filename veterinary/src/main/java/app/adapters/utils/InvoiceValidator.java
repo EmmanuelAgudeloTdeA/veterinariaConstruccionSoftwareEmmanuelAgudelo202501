@@ -1,8 +1,6 @@
-package app.adapters.inputs.utils;
+package app.adapters.utils;
 
 import org.springframework.stereotype.Component;
-
-import java.sql.Date;
 
 @Component
 public class InvoiceValidator extends SimpleValidator {

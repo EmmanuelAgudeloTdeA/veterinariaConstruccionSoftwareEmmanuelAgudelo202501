@@ -8,9 +8,12 @@ import app.adapters.persons.PersonAdapter;
 import app.adapters.persons.entity.PersonEntity;
 import app.adapters.pets.PetAdapter;
 import app.adapters.pets.entity.PetEntity;
+import app.adapters.users.UserAdapter;
+import app.adapters.users.entity.UserEntity;
 import app.domain.models.MedicalHistory;
 import app.domain.models.Person;
 import app.domain.models.Pet;
+import app.domain.models.User;
 import app.ports.MedicalHistoryPort;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +38,8 @@ public class MedicalHistoryAdapter implements MedicalHistoryPort {
     private OrderAdapter orderAdapter;
     @Autowired
     private PetAdapter petAdapter;
+    @Autowired
+    private UserAdapter userAdapter;
 
     @Override
     public void saveMedicalHistory(MedicalHistory medicalHistory) {
@@ -68,7 +73,7 @@ public class MedicalHistoryAdapter implements MedicalHistoryPort {
         medicalHistory.setMedicalHistoryId(medicalHistoryEntity.getMedicalHistoryId());
         medicalHistory.setDate(medicalHistoryEntity.getDate());
         if (medicalHistoryEntity.getVeterinarian() != null) {
-            Person veterinarian = personAdapter.personAdapter(medicalHistoryEntity.getVeterinarian());
+            User veterinarian = userAdapter.userAdapter(medicalHistoryEntity.getVeterinarian());
             medicalHistory.setVeterinarian(veterinarian);
         }
         if (medicalHistoryEntity.getPet() != null) {
@@ -100,7 +105,7 @@ public class MedicalHistoryAdapter implements MedicalHistoryPort {
         medicalHistory.setMedicalHistoryId(medicalHistoryEntity.getMedicalHistoryId());
         medicalHistory.setDate(medicalHistoryEntity.getDate());
         if (medicalHistoryEntity.getVeterinarian() != null) {
-            Person veterinarian = personAdapter.personAdapter(medicalHistoryEntity.getVeterinarian());
+            User veterinarian = userAdapter.userAdapter(medicalHistoryEntity.getVeterinarian());
             medicalHistory.setVeterinarian(veterinarian);
         }
         if (medicalHistoryEntity.getPet() != null) {
@@ -129,8 +134,8 @@ public class MedicalHistoryAdapter implements MedicalHistoryPort {
         medicalHistoryEntity.setMedicalHistoryId(medicalHistory.getMedicalHistoryId());
         medicalHistoryEntity.setDate(medicalHistory.getDate());
         if (medicalHistory.getVeterinarian() != null) {
-            PersonEntity ownerEntity = personAdapter.personEntityAdapter(medicalHistory.getVeterinarian());
-            medicalHistoryEntity.setVeterinarian(ownerEntity);
+            UserEntity userEntity = userAdapter.userEntityAdapter(medicalHistory.getVeterinarian());
+            medicalHistoryEntity.setVeterinarian(userEntity);
         }
         if (medicalHistory.getPet() != null) {
             PetEntity petEntity = petAdapter.petEntityAdapter(medicalHistory.getPet());
