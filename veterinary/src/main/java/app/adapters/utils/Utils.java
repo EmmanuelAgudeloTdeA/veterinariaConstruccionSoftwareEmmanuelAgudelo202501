@@ -1,4 +1,4 @@
-package app.adapters.inputs.utils;
+package app.adapters.utils;
 
 import lombok.Getter;
 

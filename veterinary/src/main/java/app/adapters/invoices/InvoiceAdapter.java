@@ -1,6 +1,5 @@
 package app.adapters.invoices;
 
-import app.adapters.inputs.utils.Utils;
 import app.adapters.invoices.entity.InvoiceEntity;
 import app.adapters.invoices.repository.InvoiceRepository;
 import app.adapters.orders.OrderAdapter;
