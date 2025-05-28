@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 public class MedicalHistoryRequest {
     private long ownerDocument;
     private int petIndex;
-    private User veterinarian;
+    private long veterinarianDocument;
     private Timestamp date;
     private String reasonForConsultation;
     private String symptoms;
