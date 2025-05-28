@@ -10,9 +10,9 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 public class InvoiceRequest {
-    private Pet pet;
-    private Person owner;
-    private Order order;
+    private long petId;
+    private long ownerDocument;
+    private long orderId;
     private String productName;
     private float price;
     private int amount;

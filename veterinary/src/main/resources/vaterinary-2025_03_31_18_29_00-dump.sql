@@ -77,7 +77,7 @@ CREATE TABLE `medical_histories` (
   UNIQUE KEY `order_id` (`order_id`),
   KEY `veterinarian_id` (`veterinarian_id`),
   KEY `medical_histories_pets_id_fk` (`pet_Id`),
-  CONSTRAINT `medical_histories_ibfk_1` FOREIGN KEY (`veterinarian_id`) REFERENCES `persons` (`id`),
+  CONSTRAINT `medical_histories_ibfk_1` FOREIGN KEY (`veterinarian_id`) REFERENCES `users` (`id`),
   CONSTRAINT `medical_histories_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `medical_histories_pets_id_fk` FOREIGN KEY (`pet_Id`) REFERENCES `pets` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -110,7 +110,7 @@ CREATE TABLE `orders` (
   KEY `owner_id` (`owner_id`),
   KEY `veterinarian_id` (`veterinarian_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `persons` (`id`),
-  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`veterinarian_id`) REFERENCES `persons` (`id`)
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`veterinarian_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

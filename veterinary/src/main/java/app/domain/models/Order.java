@@ -11,12 +11,12 @@ import lombok.Setter;
 public class Order {
     private long orderId;
     private Person owner;
-    private Person veterinarian;
+    private User veterinarian;
     private String medicationName;
     private String medicationDosage;
     private Timestamp date;
 
-    public Order(long orderId, Person owner, Person veterinarian, String medicationName, String medicationDosage, Timestamp date) {
+    public Order(long orderId, Person owner, User veterinarian, String medicationName, String medicationDosage, Timestamp date) {
         this.orderId = orderId;
         this.owner = owner;
         this.veterinarian = veterinarian;

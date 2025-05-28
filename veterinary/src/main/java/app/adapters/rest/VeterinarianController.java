@@ -35,9 +35,9 @@ public class VeterinarianController {
     @GetMapping("/clinical-history")
     public ResponseEntity<List<MedicalHistory>> getMedicalHistory(
             @RequestParam long ownerDocument,
-            @RequestParam int petIndex
+            @RequestParam int petId
     ) {
-        List<MedicalHistory> result = veterinarianService.getMedicalHistories(ownerDocument, petIndex);
+        List<MedicalHistory> result = veterinarianService.getMedicalHistories(ownerDocument, petId);
         return ResponseEntity.ok(result);
     }
 
