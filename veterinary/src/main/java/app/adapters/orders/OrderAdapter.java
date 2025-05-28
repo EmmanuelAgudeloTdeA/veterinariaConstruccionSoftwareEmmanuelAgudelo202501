@@ -4,8 +4,11 @@ import app.adapters.orders.entity.OrderEntity;
 import app.adapters.orders.repository.OrderRepository;
 import app.adapters.persons.PersonAdapter;
 import app.adapters.persons.entity.PersonEntity;
+import app.adapters.users.UserAdapter;
+import app.adapters.users.entity.UserEntity;
 import app.domain.models.Order;
 import app.domain.models.Person;
+import app.domain.models.User;
 import app.ports.OrderPort;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +26,8 @@ public class OrderAdapter implements OrderPort {
     private OrderRepository orderRepository;
     @Autowired
     private PersonAdapter personAdapter;
+    @Autowired
+    private UserAdapter userAdapter;
 
     @Override
     public void saveOrder(Order order) {
@@ -60,7 +65,7 @@ public class OrderAdapter implements OrderPort {
             order.setOwner(owner);
         }
         if (orderEntity.getVeterinarian() != null) {
-            Person veterinarian = personAdapter.personAdapter(orderEntity.getVeterinarian());
+            User veterinarian = userAdapter.userAdapter(orderEntity.getVeterinarian());
             order.setVeterinarian(veterinarian);
         }
         return order;
@@ -77,7 +82,7 @@ public class OrderAdapter implements OrderPort {
             orderEntity.setOwner(ownerEntity);
         }
         if (order.getVeterinarian() != null) {
-            PersonEntity veterinarianEntity = personAdapter.personEntityAdapter(order.getVeterinarian());
+            UserEntity veterinarianEntity = userAdapter.userEntityAdapter(order.getVeterinarian());
             orderEntity.setVeterinarian(veterinarianEntity);
         }
         return orderEntity;

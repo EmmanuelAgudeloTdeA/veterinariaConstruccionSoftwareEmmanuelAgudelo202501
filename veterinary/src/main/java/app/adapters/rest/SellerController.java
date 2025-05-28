@@ -30,7 +30,7 @@ public class SellerController {
     @Autowired
     private InvoicePort invoicePort;
 
-    @PostMapping("/consult-order")
+    @GetMapping("/consult-order")
     public ResponseEntity<?> consultOrder(@RequestParam long document) {
         try {
             Person person = personPort.findByDocument(document);
@@ -52,7 +52,7 @@ public class SellerController {
     @PostMapping("/invoice/create")
     public ResponseEntity<?> registerInvoice(@RequestBody InvoiceRequest request) {
         try {
-            Person owner = personPort.findByDocument(request.getOwner().getDocument());
+            Person owner = personPort.findByDocument(request.getOwnerDocument());
             if (owner == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el cliente");
             }
@@ -68,7 +68,7 @@ public class SellerController {
             }
 
             Pet selectedPet = pets.stream()
-                    .filter(p -> p.getPetId() == request.getPet().getPetId())
+                    .filter(p -> p.getPetId() == request.getPetId())
                     .findFirst()
                     .orElseThrow(() -> new BusinessException("Mascota seleccionada inválida"));
 

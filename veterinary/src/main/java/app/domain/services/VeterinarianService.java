@@ -20,17 +20,18 @@ public class VeterinarianService {
 
     public void registerClinicalHistory(MedicalHistoryRequest request) {
         Person owner = personPort.findByDocument(request.getOwnerDocument());
+        Person veterinarianPerson = personPort.findByDocument(request.getVeterinarianDocument());
+        User veterinarian = userPort.findByPerson(veterinarianPerson);
         if (owner == null) throw new RuntimeException("Dueño no encontrado.");
-
         List<Pet> pets = petPort.getPetsByPerson(owner);
         if (pets.isEmpty() || request.getPetIndex() < 0 || request.getPetIndex() >= pets.size())
             throw new RuntimeException("Mascota inválida.");
-
+        System.out.println(pets);
         Pet selectedPet = pets.get(request.getPetIndex());
 
         Order order = new Order();
         order.setOwner(owner);
-        order.setVeterinarian(request.getVeterinarian());
+        order.setVeterinarian(veterinarian);
         order.setMedicationName(request.getPrescribedMedication());
         order.setMedicationDosage(request.getMedicationDosage());
         order.setDate(Utils.getCurrentDate());
@@ -38,7 +39,7 @@ public class VeterinarianService {
 
         MedicalHistory medicalHistory = new MedicalHistory();
         medicalHistory.setDate(Utils.getCurrentDate());
-        medicalHistory.setVeterinarian(request.getVeterinarian());
+        medicalHistory.setVeterinarian(veterinarian);
         medicalHistory.setPet(selectedPet);
         medicalHistory.setReasonForConsultation(request.getReasonForConsultation());
         medicalHistory.setSymptoms(request.getSymptoms());
@@ -55,15 +56,23 @@ public class VeterinarianService {
         medicalHistoryPort.saveMedicalHistory(medicalHistory);
     }
 
-    public List<MedicalHistory> getMedicalHistories(long ownerDocument, int petIndex) {
+    public List<MedicalHistory> getMedicalHistories(long ownerDocument, int petId) {
         Person owner = personPort.findByDocument(ownerDocument);
         if (owner == null) throw new RuntimeException("Dueño no encontrado.");
-
         List<Pet> pets = petPort.getPetsByPerson(owner);
-        if (pets.isEmpty() || petIndex < 0 || petIndex >= pets.size())
-            throw new RuntimeException("Mascota inválida.");
 
-        return medicalHistoryPort.findMedicalHistoriesByPet(pets.get(petIndex));
+        // Buscar la mascota por ID
+        Pet selectedPet = null;
+        for (Pet pet : pets) {
+            if (pet.getPetId() == petId) {
+                selectedPet = pet;
+                break;
+            }
+        }
+
+        if (selectedPet == null) throw new RuntimeException("Mascota no encontrada.");
+
+        return medicalHistoryPort.findMedicalHistoriesByPet(selectedPet);
     }
 
     public Order getOrderByOwnerDocument(long document) {

@@ -1,6 +1,7 @@
 package app.adapters.orders.entity;
 
 import app.adapters.persons.entity.PersonEntity;
+import app.adapters.users.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class OrderEntity {
     private PersonEntity owner;
     @JoinColumn(name = "veterinarian_id")
     @ManyToOne
-    private PersonEntity veterinarian;
+    private UserEntity veterinarian;
     @Column(name = "medication_name")
     private String medicationName;
     @Column(name = "medication_dosage")
